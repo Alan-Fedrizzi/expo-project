@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
+import styled, { css } from "styled-components/native";
 import { Button, ButtonProps } from "@mui/material";
 
 interface ButtonStyleProps extends ButtonProps {
@@ -8,38 +8,13 @@ interface ButtonStyleProps extends ButtonProps {
 
 // funcionar na web
 // NÃO funciona no android
+// tentei remover o styled emotion e colocar o styled-components... não funciona geral agora...
 
-const ButtonContainer = styled(Button)<ButtonStyleProps>(
-  ({ theme, teste = false }) => ({
+const ButtonContainer = styled(Button)<ButtonStyleProps>`
+  ${({ theme, teste = false }) => css`
     color: teste ? "red" : "yellow",
-    variants: [
-      {
-        props: {
-          teste: true,
-        },
-        style: {
-          background: "orange",
-        },
-      },
-      {
-        props: {
-          variant: "outlined",
-        },
-        style: {
-          color: teste ? "green" : "violet",
-        },
-      },
-      {
-        props: {
-          variant: "contained",
-        },
-        style: {
-          color: "blue",
-        },
-      },
-    ],
-  })
-);
+  `}
+`;
 
 export default function TpButton(props: ButtonStyleProps) {
   const { children, ...otherProps } = props;
